@@ -1,6 +1,7 @@
 import './App.scss';
 import Data from './data.json'
 import Catalog from './Catalog.js'
+import Numpad from './Numpad.js'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       </section>
 
       <section id="pos">
-        Point of Sale
+        <Numpad></Numpad>
       </section>
     </main>
   );

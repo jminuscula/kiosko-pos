@@ -1,0 +1,62 @@
+#numpad {
+    display: grid;
+    grid-template-areas:
+        "dis  dis  dis  dis"
+        "num7 num8 num9 amount"
+        "num4 num5 num6 amount"
+        "num1 num2 num3 amount"
+        "num0 numD clear amount";
+
+    .display { grid-area: dis; }
+    .clear { grid-area: clear; }
+    .amount { grid-area: amount; }
+    .numD { grid-area: numD; }
+    .num0 { grid-area: num0; }
+    .num1 { grid-area: num1; }
+    .num2 { grid-area: num2; }
+    .num3 { grid-area: num3; }
+    .num4 { grid-area: num4; }
+    .num5 { grid-area: num5; }
+    .num6 { grid-area: num6; }
+    .num7 { grid-area: num7; }
+    .num8 { grid-area: num8; }
+    .num9 { grid-area: num9; }
+
+    & > * {
+        text-align: center;
+        border: 1px solid #999;
+        font-weight: bolder;
+        border-collapse: collapse;
+    }
+
+    .num, .numD, .clear {
+        line-height: 4em;
+    }
+}
+
+#numpad .display {
+    background: white;
+    line-height: normal;
+    font-size: 1em;
+    border-bottom: none;
+    padding: 1.25em;
+    margin: 0;
+}
+
+#numpad .num {
+    background: #ccc;
+}
+
+#numpad .numD {
+    background: white;
+}
+
+#numpad .clear {
+    background: orange;
+    color: white;
+}
+
+#numpad .amount {
+    padding-top: 1em;
+    background: lightgreen;
+}
