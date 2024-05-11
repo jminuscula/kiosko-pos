@@ -1,0 +1,20 @@
+:root {
+    --section-gap: 1em;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+}
+
+main {
+    padding: var(--section-gap);
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,10 @@
+@use "style/base.scss";
+@use "style/catalog.scss";
+@use "style/catalog-styles.scss";
+@use "style/pos.scss";
+
+main {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 8fr 6fr;
+}
