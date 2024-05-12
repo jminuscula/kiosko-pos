@@ -5,7 +5,7 @@ function Item(section, item) {
     const addItem = useStore((store) => store.addItem);
 
     return (
-        <div className={"item " + item.style} onClick={addItem(item)}>
+        <div key={item.code} className={"item " + item.style} onClick={addItem(item)}>
             <div className="item-name"><p>{item.name}</p></div>
             <div className="item-price"><p>{item.price}€</p></div>
         </div>
@@ -14,10 +14,10 @@ function Item(section, item) {
 
 function Section(section) {
     return (
-        <div>
+        <div className="section" key={section.code}>
             <h1>{section.title}</h1>
             <div className="section-items">
-                {section.items.map(i => <div key={i.code}>{Item(section, i)}</div>)}
+                {section.items.map(i => Item(section, i))}
             </div>
         </div>
     );
@@ -25,7 +25,7 @@ function Section(section) {
 
 function Catalog({data}) {
     return (<>
-        {data.sections.map(s => <section key={s.code}>{Section(s)}</section>)}
+        {data.sections.map(s => Section(s))}
     </>);
 }
 
