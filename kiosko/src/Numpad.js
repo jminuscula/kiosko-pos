@@ -24,6 +24,12 @@ function Numpad() {
         }
     }
 
+    function toggleDecimal() {
+        if (`${selectedQuantity}`.indexOf('.') < 0) {
+            setIsDecimal(!isDecimal)
+        }
+    }
+
     function addCustomAmount(amount) {
         const price = Number(selectedQuantity);
 
@@ -49,7 +55,7 @@ function Numpad() {
             <div onClick={() => addNum("3")} className="num num3">3</div>
             <div onClick={() => addNum("0")} className="num num0">0</div>
 
-            <div onClick={() => setIsDecimal(!isDecimal)}
+            <div onClick={() => toggleDecimal()}
                  className={"numD " + (isDecimal ? 'active' : '')} >
                 .
             </div>
