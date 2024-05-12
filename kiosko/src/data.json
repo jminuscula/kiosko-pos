@@ -1,102 +1,126 @@
 {
     "sections": [
         {
+            "code": "Chuches1",
             "title": "Chuches",
             "items": [
                 {
+                    "code": "chuche1-1",
                     "name": "🍭 Chuche pequeña",
                     "price": 0.05,
                     "style": "name-red price-red"
                 },
                 {
+                    "code": "chuche1-2",
                     "name": "🍪 Chuche mediana",
                     "price": 0.10,
                     "style": "name-yellow price-orange"
                 },
                 {
+                    "code": "chuche1-3",
                     "name": "Chuche grande",
                     "price": 0.15,
                     "style": "name-blue price-green"
                 },
                 {
+                    "code": "chuche1-4",
                     "name": "🍬 Chuche especial",
                     "price": 0.25
                 },
                 {
+                    "code": "chuche1-5",
                     "name": "Chuche grande 2",
                     "price": 0.15
                 },
                 {
+                    "code": "chuche1-6",
                     "name": "Chuche grande 3",
                     "price": 0.15
                 },
                 {
+                    "code": "chuche1-7",
                     "name": "Chuche especial 2",
                     "price": 0.25
                 }
             ]
         },
         {
+            "code": "Chuches2",
             "title": "Chuches 2",
             "items": [
                 {
+                    "code": "chuche2-1",
                     "name": "Chuche pequeña x",
                     "price": 0.05
                 },
                 {
+                    "code": "chuche2-2",
                     "name": "Chuche mediana x2",
                     "price": 0.10
                 },
                 {
+                    "code": "chuche2-3",
                     "name": "Chuche grande x3",
                     "price": 0.15
                 },
                 {
+                    "code": "chuche2-4",
                     "name": "Chuche especial x4 more things",
                     "price": 0.25
                 },
                 {
+                    "code": "chuche2-5",
                     "name": "Chuche grande x5",
                     "price": 0.15
                 },
                 {
+                    "code": "chuche2-6",
                     "name": "Chuche grande x6",
                     "price": 0.15
                 },
                 {
+                    "code": "chuche2-7",
                     "name": "Chuche especial x7",
                     "price": 0.25
                 }
             ]
         },
         {
+            "code": "Snacks1",
             "title": "Snacks",
             "items": [
                 {
+                    "code": "snack1-1",
                     "name": "Chuche pequeña y8",
                     "price": 0.05
                 },
                 {
+                    "code": "snack1-2",
                     "name": "Chuche mediana y9",
                     "price": 0.10
                 },
                 {
+                    "code": "snack1-3",
                     "name": "Chuche grande y10",
                     "price": 0.15
                 },
                 {
+                    "code": "snack1-4",
                     "name": "Chuche especial y11",
                     "price": 0.25
                 },
                 {
+                    "code": "snack1-5",
                     "name": "Chuche grande y12",
                     "price": 0.15
                 },
                 {
+                    "code": "snack1-6",
                     "name": "Chuche grande y13",
                     "price": 0.15
                 },
                 {
+                    "code": "snack1-7",
                     "name": "Chuche especial y14",
                     "price": 0.25
                 }
