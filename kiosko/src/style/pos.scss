@@ -1,4 +1,7 @@
 #pos {
+    display: flex;
+    flex-flow: column;
+
     padding-left: var(--section-gap);
     border-left: 1px solid #333;
 }

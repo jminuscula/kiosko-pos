@@ -21,7 +21,7 @@ function addItem(set, item) {
         return {
             ...state,
             selectedQuantity: 0,
-            items: (state.items || []).concat(Array(state.selectedQuantity).fill(item)),
+            items: state.items.concat(Array(state.selectedQuantity).fill(item)),
         };
     }
 
@@ -34,12 +34,23 @@ function addAmount(set, amount) {
     function doAddAmount(state) {
         return {
             ...state,
-            items: (state.items || []).concat(item),
+            items: state.items.concat(item),
             selectedQuantity: 0,
         }
     }
 
     return () => set(doAddAmount);
+}
+
+function removeItem(set, idx) {
+    function doRemoveItem(state) {
+        return {
+            ...state,
+            items: state.items.filter((e, eidx) => eidx !== idx),
+        }
+    }
+
+    return () => set(doRemoveItem);
 }
 
 const useStore = create((set) => ({
@@ -49,6 +60,8 @@ const useStore = create((set) => ({
 
   selectedQuantity: 0,
   setSelectedQuantity: (n) => set({ selectedQuantity: n }),
+
+  removeItem: (idx) => removeItem(set, idx),
 }));
 
 export { useStore };

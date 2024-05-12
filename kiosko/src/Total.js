@@ -15,11 +15,10 @@ function Total() {
     const items = useStore((state) => state.items);
 
     return (
-        <div>
+        <section id="total">
             <h1>Total</h1>
             <p>{getTotal(items)}€</p>
-            <div>{JSON.stringify(items)}</div>
-        </div>
+        </section>
     );
 }
 

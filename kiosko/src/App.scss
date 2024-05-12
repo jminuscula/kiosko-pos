@@ -3,6 +3,8 @@
 @use "style/catalog-styles.scss";
 @use "style/pos.scss";
 @use "style/numpad.scss";
+@use "style/total.scss";
+@use "style/order.scss";
 
 main {
   display: grid;

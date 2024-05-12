@@ -7,7 +7,7 @@ function Item(section, item) {
     return (
         <div key={item.code} className={"item " + item.style} onClick={addItem(item)}>
             <div className="item-name"><p>{item.name}</p></div>
-            <div className="item-price"><p>{item.price}€</p></div>
+            <div className="item-price"><p>{item.price.toFixed(2)}€</p></div>
         </div>
     )
 }

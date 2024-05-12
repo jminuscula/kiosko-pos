@@ -1,0 +1,23 @@
+#order {
+    flex: 1;
+}
+
+.order-item {
+    display: flex;
+    flex-flow: row;
+
+    line-height: 3em;
+
+    .order-item-number, .order-item-price {
+        margin-right: 1em;
+    }
+
+    .order-item-name {
+        flex: 1;
+    }
+
+    .order-item-remove {
+        margin: 0.25em;
+    }
+
+}
