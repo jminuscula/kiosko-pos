@@ -1,5 +1,5 @@
 
-import {useState} from 'react';
+import { useState } from 'react';
 import { useStore } from './store.js';
 
 
@@ -12,6 +12,9 @@ function Numpad() {
 
     function addNum(n) {
         const newNum = isDecimal ? `${selectedQuantity}.${n}` : `${selectedQuantity}${n}`;
+        if (newNum.indexOf('.') > 0 && newNum.length - newNum.indexOf('.') -1 > 2) {
+            return;
+        }
 
         const quantity = Number(newNum);
         setSelectedQuantity(quantity);
