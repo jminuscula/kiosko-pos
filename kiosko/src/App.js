@@ -2,6 +2,7 @@ import './App.scss';
 import Data from './data.json'
 import Catalog from './Catalog.js'
 import Numpad from './Numpad.js'
+import Total from './Total.js'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 
       <section id="pos">
         <Numpad></Numpad>
+        <Total></Total>
       </section>
     </main>
   );
