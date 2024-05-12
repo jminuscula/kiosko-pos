@@ -11,11 +11,13 @@ function Numpad() {
     const setSelectedQuantity = useStore((state) => state.setSelectedQuantity);
 
     function addNum(n) {
-        const newNum = `${selectedQuantity}${n}`;
+        const newNum = isDecimal ? `${selectedQuantity}.${n}` : `${selectedQuantity}${n}`;
 
         const quantity = Number(newNum);
-        if (quantity === Math.round(quantity)) {
-            setSelectedQuantity(quantity);
+        setSelectedQuantity(quantity);
+
+        if (isDecimal) {
+            setIsDecimal(false);
         }
     }
 
@@ -30,7 +32,7 @@ function Numpad() {
     return (
         <div id="numpad">
             <h1 className="display">
-                {selectedQuantity}
+                {selectedQuantity + (isDecimal ? '.' : '')}
             </h1>
 
             <div onClick={() => addNum("7")} className="num num7">7</div>
