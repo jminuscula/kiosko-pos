@@ -70,3 +70,10 @@
     padding-top: 1em;
     background: lightgreen;
 }
+
+#numpad .num:active,
+#numpad .clear:active,
+#numpad .amount:active {
+    background: white;
+    color: black;
+}

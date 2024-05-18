@@ -44,25 +44,25 @@ function Numpad() {
                 {selectedQuantity + (isDecimal ? '.' : '')}
             </h1>
 
-            <div onClick={() => addNum("7")} className="num num7">7</div>
-            <div onClick={() => addNum("8")} className="num num8">8</div>
-            <div onClick={() => addNum("9")} className="num num9">9</div>
-            <div onClick={() => addNum("4")} className="num num4">4</div>
-            <div onClick={() => addNum("5")} className="num num5">5</div>
-            <div onClick={() => addNum("6")} className="num num6">6</div>
-            <div onClick={() => addNum("1")} className="num num1">1</div>
-            <div onClick={() => addNum("2")} className="num num2">2</div>
-            <div onClick={() => addNum("3")} className="num num3">3</div>
-            <div onClick={() => addNum("0")} className="num num0">0</div>
+            <button onClick={() => addNum("7")} className="num num7">7</button>
+            <button onClick={() => addNum("8")} className="num num8">8</button>
+            <button onClick={() => addNum("9")} className="num num9">9</button>
+            <button onClick={() => addNum("4")} className="num num4">4</button>
+            <button onClick={() => addNum("5")} className="num num5">5</button>
+            <button onClick={() => addNum("6")} className="num num6">6</button>
+            <button onClick={() => addNum("1")} className="num num1">1</button>
+            <button onClick={() => addNum("2")} className="num num2">2</button>
+            <button onClick={() => addNum("3")} className="num num3">3</button>
+            <button onClick={() => addNum("0")} className="num num0">0</button>
 
-            <div onClick={() => toggleDecimal()}
+            <button onClick={() => toggleDecimal()}
                  className={"numD " + (isDecimal ? 'active' : '')} >
                 .
-            </div>
+            </button>
 
-            <div onClick={() => setSelectedQuantity(0)} className="clear">C</div>
+            <button onClick={() => setSelectedQuantity(0)} className="clear">C</button>
 
-            <div onClick={() => addCustomAmount()} className="amount">ADD</div>
+            <button onClick={() => addCustomAmount()} className="amount">ADD</button>
         </div>
     )
 }
