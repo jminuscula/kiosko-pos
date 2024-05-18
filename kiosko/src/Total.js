@@ -1,23 +1,65 @@
+import Data from './data.json'
+import { useStore } from './store.js'
+import { useState } from 'react'
 
-import { useStore } from './store.js';
+function toAmount(number) {
+    let amount = Math.round(number * 1000) / 1000;
+    return amount.toFixed(2);
+}
 
-function getTotal(items) {
-    let total = 0;
+function getPrice(items) {
+    let price = 0;
     for (const item of Object.values(items)) {
-        total += item.price;
+        price += item.price;
     }
 
-    total = Math.round(total * 100) / 100;
-    return total.toFixed(2);
+    return price;
+}
+
+function getSubtotal(price, discount) {
+    return price - (price * (discount / 100));
+}
+
+function getTaxes(subtotal, vat) {
+    return subtotal * (vat / 100);
+}
+
+function getTotal(subtotal, taxes) {
+    return subtotal + taxes;
 }
 
 function Total() {
     const items = useStore((state) => state.items);
+    const [isMember, setIsMember] = useState(false);
+    const discountPct = isMember ? Data.settings.membershipDiscount : 0;
+
+    const price = getPrice(items);
+    const subtotal = getSubtotal(price, discountPct);
+    const discountAmount = price - subtotal;
+    const taxes = getTaxes(subtotal, Data.settings.vat);
+    const total = getTotal(subtotal, taxes);
 
     return (
         <section id="total">
-            <h1>Total</h1>
-            <p>{getTotal(items)}€</p>
+            <div id="membership"
+                onClick={() => setIsMember(!isMember)} className={isMember ? 'member' : ''}>
+                <p>member</p>
+            </div>
+            <div id="subtotal">
+                <div>
+                    <p>SUBTOTAL … {toAmount(subtotal)}€</p>
+                    <p>VAT {Data.settings.vat}% … {toAmount(taxes)}€</p>
+                    { discountPct ? (
+                        <p>SOCIO {discountPct}% … {toAmount(discountAmount)}€</p>
+                    ) : (
+                        <p>NO SOCIO</p>
+                    )}
+                </div>
+                <h1 cassName="amount">{toAmount(total)}€</h1>
+            </div>
+            <div id="confirm-order">
+                <p>sale</p>
+            </div>
         </section>
     );
 }

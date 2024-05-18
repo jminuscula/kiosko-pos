@@ -1,6 +1,40 @@
 #total {
-    position: sticky;
-    bottom: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
 
-    background: white;
+#total #membership,
+#total #confirm-order {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    min-width: 6em;
+    padding: 0 1em;
+}
+
+#total #membership {
+    background-color: #ccc;
+
+    &.member {
+        background: blue; color: white;
+    }
+}
+
+#total #subtotal {
+    flex-grow: 1;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 0 1em;
+}
+
+#total #confirm-order {
+    background-color: greenyellow;
 }

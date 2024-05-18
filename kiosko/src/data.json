@@ -1,4 +1,8 @@
 {
+    "settings": {
+        "vat": 21.0,
+        "membershipDiscount": 5.0
+    },
     "sections": [
         {
             "code": "Chuches1",
