@@ -1,7 +1,7 @@
 #pos {
     display: flex;
     flex-flow: column;
-    max-height: 100vh;
+    max-height: calc(100vh - var(--section-gap) * 2);
 
     padding-left: var(--section-gap);
     border-left: 1px solid #333;
