@@ -1,10 +1,12 @@
 import Data from './data.json'
+
 import { useStore } from './store.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { recordSale } from './db.js';
+
 
 function toAmount(number) {
-    let amount = Math.round(number * 1000) / 1000;
-    return amount.toFixed(2);
+    return number.toFixed(3).replace(/(\..{2}).*$/, '$1');
 }
 
 function getPrice(items) {
@@ -39,6 +41,11 @@ function Total() {
     const taxes = getTaxes(subtotal, Data.settings.vat);
     const total = getTotal(subtotal, taxes);
 
+    async function handleRecordSale() {
+        const sale = {items, sale: {price, discountPct, taxes, total}};
+        await recordSale(sale);
+    };
+
     return (
         <section id="total">
             <div id="membership"
@@ -47,17 +54,17 @@ function Total() {
             </div>
             <div id="subtotal">
                 <div>
-                    <p>SUBTOTAL … {toAmount(subtotal)}€</p>
-                    <p>VAT {Data.settings.vat}% … {toAmount(taxes)}€</p>
+                    <p>SUBTOTAL … {toAmount(price)}€</p>
                     { discountPct ? (
                         <p>SOCIO {discountPct}% … {toAmount(discountAmount)}€</p>
                     ) : (
                         <p>NO SOCIO</p>
                     )}
+                    <p>VAT {Data.settings.vat}% … {toAmount(taxes)}€</p>
                 </div>
-                <h1 cassName="amount">{toAmount(total)}€</h1>
+                <h1 className="amount">{toAmount(total)}€</h1>
             </div>
-            <div id="confirm-order">
+            <div id="confirm-order" onClick={handleRecordSale}>
                 <p>sale</p>
             </div>
         </section>
