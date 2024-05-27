@@ -1,6 +1,11 @@
 
 import { create } from 'zustand';
 
+const initialState = {
+    items: [],
+    selectedQuantity: 0,
+};
+
 function addItem(set, item) {
     function doAddItem(state) {
         // Manual quantity is empty
@@ -62,6 +67,8 @@ const useStore = create((set) => ({
   setSelectedQuantity: (n) => set({ selectedQuantity: n }),
 
   removeItem: (idx) => removeItem(set, idx),
+
+  resetSale: () => set(initialState),
 }));
 
 export { useStore };

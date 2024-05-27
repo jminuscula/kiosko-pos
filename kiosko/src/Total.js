@@ -41,9 +41,16 @@ function Total() {
     const taxes = getTaxes(subtotal, Data.settings.vat);
     const total = getTotal(subtotal, taxes);
 
+    const resetSale = useStore((state) => state.resetSale);
+
     async function handleRecordSale() {
         const sale = {items, sale: {price, discountPct, taxes, total}};
-        await recordSale(sale);
+        try {
+            await recordSale(sale);
+            resetSale();
+        } catch (error) {
+            console.error("Error recording sale", error);
+        }
     };
 
     return (
