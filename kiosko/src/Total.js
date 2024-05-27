@@ -42,6 +42,10 @@ function Total() {
     const resetSale = useStore((state) => state.resetSale);
 
     async function handleRecordSale() {
+        if (!items.length) {
+            return;
+        }
+
         const sale = {items, sale: {total, discountPct, taxes}};
         try {
             await recordSale(sale);
@@ -69,7 +73,7 @@ function Total() {
                 </div>
                 <h1 className="amount">{toAmount(grandTotal)}€</h1>
             </div>
-            <div id="confirm-order" onClick={handleRecordSale}>
+            <div id="confirm-order" onClick={handleRecordSale} className={items.length ? '' : 'disabled'}>
                 <p>sale</p>
             </div>
         </section>

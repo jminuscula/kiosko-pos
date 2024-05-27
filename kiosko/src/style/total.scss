@@ -37,4 +37,9 @@
 
 #total #confirm-order {
     background-color: greenyellow;
+
+    &.disabled {
+        background-color: #666;
+        color: #999;
+    }
 }
