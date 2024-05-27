@@ -1,34 +1,38 @@
-import Dexie from 'dexie';
-
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+    initializeFirestore, getFirestore,
+    persistentLocalCache, persistentMultipleTabManager,
+    collection, doc, addDoc, getDoc, getDocs
+} from "firebase/firestore";
 
 
 let FirebaseDB;
-let LocalDB;
-
-const DB_NAME = 'sales';
+const DB_NAMES = {
+    sales: "sales",
+    settings: "settings",
+    catalog: "catalog",
+};
 
 
 function initFirebase() {
-    // TODO: Replace the following with your app's Firebase project configuration
-    // See: https://support.google.com/firebase/answer/7015592
-    const firebaseConfig = {};
+    const firebaseConfig = {
+        apiKey: "AIzaSyAW4fGZapP6WeyJEej8wkh0EMmH752nbsg",
+        authDomain: "kiosko-andrew.firebaseapp.com",
+        projectId: "kiosko-andrew",
+        storageBucket: "kiosko-andrew.appspot.com",
+        messagingSenderId: "515986206321",
+        appId: "1:515986206321:web:202ed92586fae830c175d0"
+    };
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    initializeFirestore(app, {
+       localCache: persistentLocalCache({
+            tabManager: persistentMultipleTabManager()
+        }),
+     });
 
-    // Initialize Cloud Firestore and get a reference to the service
-    FirebaseDB = getFirestore(app);
+     FirebaseDB = getFirestore(app);
 }
-
-// initFirebase();
-
-
-LocalDB = new Dexie(DB_NAME);
-LocalDB.version(1).stores({
-  sales: '++id'
-});
 
 async function recordSale(sale) {
     const ts = new Date();
@@ -38,12 +42,26 @@ async function recordSale(sale) {
         sale: sale.sale
     };
 
-    await LocalDB.sales.add(record);
-
-    if (FirebaseDB) {
-      await setDoc(doc(FirebaseDB, "sales", "LA"), record);
-    }
+    const sales = collection(FirebaseDB, DB_NAMES.sales);
+    await addDoc(sales, record);
 }
 
+async function getCatalogData() {
+    const settingsDoc = doc(FirebaseDB, DB_NAMES.settings, "active");
+    const settings = await getDoc(settingsDoc);
 
-export { recordSale };
+    const catalogCollection = collection(FirebaseDB, DB_NAMES.catalog);
+    const sections = await getDocs(catalogCollection);
+
+    const sectionDocs = [];
+    sections.forEach((doc) => sectionDocs.push(doc.data()));
+    sectionDocs.sort((s) => s.position);
+
+    return {
+        settings: settings.data(),
+        sections: sectionDocs,
+    };
+}
+
+initFirebase();
+export { getCatalogData, recordSale };

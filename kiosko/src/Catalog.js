@@ -24,8 +24,9 @@ function Section(section) {
 }
 
 function Catalog({data}) {
+    if (!data) return;
     return (<>
-        {data.sections.map(s => Section(s))}
+        {data.sections && data.sections.map(s => Section(s))}
     </>);
 }
 
