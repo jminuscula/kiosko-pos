@@ -9,7 +9,7 @@ function toAmount(number) {
     return number.toFixed(3).replace(/(\..{2}).*$/, '$1');
 }
 
-function getPrice(items) {
+function getTotal(items) {
     let price = 0;
     for (const item of Object.values(items)) {
         price += item.price;
@@ -18,16 +18,15 @@ function getPrice(items) {
     return price;
 }
 
-function getSubtotal(price, discount) {
-    return price - (price * (discount / 100));
-}
+function getTaxes(items, defaultVat) {
+    let totalTax = 0;
+    let itemVat;
+    for (const item of Object.values(items)) {
+        itemVat = item.vat || defaultVat;
+        totalTax += item.price * (itemVat / 100);
+    }
 
-function getTaxes(subtotal, vat) {
-    return subtotal * (vat / 100);
-}
-
-function getTotal(subtotal, taxes) {
-    return subtotal + taxes;
+    return totalTax;
 }
 
 function Total() {
@@ -35,16 +34,15 @@ function Total() {
     const [isMember, setIsMember] = useState(false);
     const discountPct = isMember ? Data.settings.membershipDiscount : 0;
 
-    const price = getPrice(items);
-    const subtotal = getSubtotal(price, discountPct);
-    const discountAmount = price - subtotal;
-    const taxes = getTaxes(subtotal, Data.settings.vat);
-    const total = getTotal(subtotal, taxes);
+    const total = getTotal(items);
+    const taxes = getTaxes(items, Data.settings.vat);
+    const discount = total * (discountPct / 100);
+    const grandTotal = total - discount;
 
     const resetSale = useStore((state) => state.resetSale);
 
     async function handleRecordSale() {
-        const sale = {items, sale: {price, discountPct, taxes, total}};
+        const sale = {items, sale: {total, discountPct, taxes}};
         try {
             await recordSale(sale);
             resetSale();
@@ -61,15 +59,15 @@ function Total() {
             </div>
             <div id="subtotal">
                 <div>
-                    <p>SUBTOTAL … {toAmount(price)}€</p>
+                    <p>SUBTOTAL … {toAmount(total)}€</p>
+                    <p>VAT inc … {toAmount(taxes)}€</p>
                     { discountPct ? (
-                        <p>SOCIO {discountPct}% … {toAmount(discountAmount)}€</p>
+                        <p>MEMBER {discountPct}% … {toAmount(discount)}€</p>
                     ) : (
-                        <p>NO SOCIO</p>
+                        <p>NOT MEMBER</p>
                     )}
-                    <p>VAT {Data.settings.vat}% … {toAmount(taxes)}€</p>
                 </div>
-                <h1 className="amount">{toAmount(total)}€</h1>
+                <h1 className="amount">{toAmount(grandTotal)}€</h1>
             </div>
             <div id="confirm-order" onClick={handleRecordSale}>
                 <p>sale</p>
